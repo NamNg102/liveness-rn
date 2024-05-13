@@ -9,11 +9,10 @@ PODS:
     - hermes-engine/Pre-built (= 0.74.1)
   - hermes-engine/Pre-built (0.74.1)
   - KeychainSwift (19.0.0)
-  - liveness-rn (1.0.01):
+  - liveness-rn (1.0.8):
     - DoubleConversion
     - glog
     - hermes-engine
-    - KeychainSwift (~> 19.0)
     - LivenessCloud
     - RCT-Folly (= 2024.01.01.00)
     - RCTRequired
@@ -1389,7 +1388,7 @@ SPEC CHECKSUMS:
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: 16b8530de1b383cdada1476cf52d1b52f0692cbc
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
-  liveness-rn: d1f27744f14e0d52e9f51c35a9509a91fae070d7
+  liveness-rn: f3c9a275e38d2042bad22b6d19512c577b429f65
   LivenessCloud: 8c373c60911f0e11be71c8cd6046e993d9d099eb
   ObjectMapper: e6e4d91ff7f2861df7aecc536c92d8363f4c9677
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
@@ -1443,6 +1442,6 @@ SPEC CHECKSUMS:
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: dafebc41bc66910af33077aaa41078e89fd635bf
 
-PODFILE CHECKSUM: ac8908cbf1a2fc8770f056d0da2db5b2a3a75689
+PODFILE CHECKSUM: 98e5fb15ed19de69f3aef8107a18f48d86ebc2fa
 
 COCOAPODS: 1.14.2
