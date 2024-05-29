@@ -1,6 +1,7 @@
 package com.livenessrn
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Choreographer
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class LivenessViewManager(
   override fun createViewInstance(reactContext: ThemedReactContext) =
     LivenessView(reactContext)
 
-  override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE)
+  override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE, "remove" to COMMAND_CLOSE)
 
   override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
     return MapBuilder.builder<String, Any>()
@@ -63,6 +64,7 @@ class LivenessViewManager(
 
     when (commandId.toInt()) {
       COMMAND_CREATE -> createFragment(root, reactNativeViewId)
+      COMMAND_CLOSE -> removeView(root, reactNativeViewId)
     }
   }
 
@@ -104,17 +106,26 @@ class LivenessViewManager(
     val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
     setupLayout(parentView)
 
+    val activity = reactContext?.currentActivity as FragmentActivity
+
     val bundle = Bundle()
     bundle.putString("KEY_BUNDLE_SCREEN", "")
     val myFragment = MainLiveNessActivity()
     myFragment.arguments = bundle
+    myFragment.setFragmentManager(activity.supportFragmentManager)
 
-    val activity = reactContext?.currentActivity as FragmentActivity
     LiveNessSDK.setConfigSDK(activity, getLivenessRequest())
     activity.supportFragmentManager
       .beginTransaction()
       .replace(reactNativeViewId, myFragment, reactNativeViewId.toString())
       .commit()
+  }
+
+
+  fun removeView(root: FrameLayout, reactNativeViewId: Int) {
+    Log.d("removeView", "removeView === ")
+    root.removeViewAt(reactNativeViewId)
+    removeView(root, reactNativeViewId)
   }
 
   fun setupLayout(view: View) {
@@ -149,6 +160,7 @@ class LivenessViewManager(
   companion object {
     private const val REACT_CLASS = "LivenessViewManager"
     private const val COMMAND_CREATE = 1
+    private const val COMMAND_CLOSE = 2
 
   }
 
