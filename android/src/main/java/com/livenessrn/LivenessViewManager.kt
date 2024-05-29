@@ -124,8 +124,8 @@ class LivenessViewManager(
 
   fun removeView(root: FrameLayout, reactNativeViewId: Int) {
     Log.d("removeView", "removeView === ")
-    root.removeViewAt(reactNativeViewId)
-    removeView(root, reactNativeViewId)
+//    root.removeViewAt(reactNativeViewId)
+//    removeView(root, reactNativeViewId)
   }
 
   fun setupLayout(view: View) {
@@ -178,7 +178,7 @@ class LivenessViewManager(
       duration = 600, privateKey = privateKey,
       appId = this.appId,
       deviceId = deviceId, clientTransactionId = this.requestId, secret = secret,
-      baseURL = baseURL, publicKey = publicKey
+      baseURL = baseURL, publicKey = publicKey, isDebug = true
     )
   }
 }

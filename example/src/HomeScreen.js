@@ -14,8 +14,10 @@ import {
 const HomeScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('Liveness')} style={styles.btn_liveness}>
-                <Text>Start LiveNess</Text>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate('Liveness')} 
+            style={styles.btn_liveness}>
+                <Text>Start LiveNess 1</Text>
             </TouchableOpacity>
         </View>
     )
