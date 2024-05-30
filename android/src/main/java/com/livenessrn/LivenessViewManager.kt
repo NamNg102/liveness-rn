@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.FrameLayout.LayoutParams
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
@@ -31,16 +32,18 @@ class LivenessViewManager(
   private var baseURL = ""
   private var privateKey = ""
   private var publicKey = ""
+  private var debugging = false
 
   private var propWidth: Int? = null
   private var propHeight: Int? = null
+  private var mCurrentFragment: Fragment? = null
 
   override fun getName() = REACT_CLASS
 
   override fun createViewInstance(reactContext: ThemedReactContext) =
     LivenessView(reactContext)
 
-  override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE, "remove" to COMMAND_CLOSE)
+  override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE)
 
   override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
     return MapBuilder.builder<String, Any>()
@@ -64,7 +67,6 @@ class LivenessViewManager(
 
     when (commandId.toInt()) {
       COMMAND_CREATE -> createFragment(root, reactNativeViewId)
-      COMMAND_CLOSE -> removeView(root, reactNativeViewId)
     }
   }
 
@@ -99,6 +101,11 @@ class LivenessViewManager(
     this.publicKey = publicKey
   }
 
+  @ReactProp(name = "debugging")
+  fun setDebugging(view: FrameLayout, debugging: Boolean) {
+    this.debugging = debugging
+  }
+
   /**
    * Replace your React Native view with a custom fragment
    */
@@ -113,19 +120,13 @@ class LivenessViewManager(
     val myFragment = MainLiveNessActivity()
     myFragment.arguments = bundle
     myFragment.setFragmentManager(activity.supportFragmentManager)
+    mCurrentFragment = myFragment
 
     LiveNessSDK.setConfigSDK(activity, getLivenessRequest())
     activity.supportFragmentManager
       .beginTransaction()
       .replace(reactNativeViewId, myFragment, reactNativeViewId.toString())
       .commit()
-  }
-
-
-  fun removeView(root: FrameLayout, reactNativeViewId: Int) {
-    Log.d("removeView", "removeView === ")
-//    root.removeViewAt(reactNativeViewId)
-//    removeView(root, reactNativeViewId)
   }
 
   fun setupLayout(view: View) {
@@ -160,7 +161,6 @@ class LivenessViewManager(
   companion object {
     private const val REACT_CLASS = "LivenessViewManager"
     private const val COMMAND_CREATE = 1
-    private const val COMMAND_CLOSE = 2
 
   }
 
@@ -178,7 +178,7 @@ class LivenessViewManager(
       duration = 600, privateKey = privateKey,
       appId = this.appId,
       deviceId = deviceId, clientTransactionId = this.requestId, secret = secret,
-      baseURL = baseURL, publicKey = publicKey, isDebug = true
+      baseURL = baseURL, publicKey = publicKey, isDebug = debugging
     )
   }
 }
