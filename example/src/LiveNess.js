@@ -96,9 +96,9 @@ const publicKey = "-----BEGIN CERTIFICATE-----\n" +
 //     }
 //   }, [ref.current, status]);
 
-  const onStartLiveNess = () => {
-    setStatus(!status);
-  };
+//   const onStartLiveNess = () => {
+//     setStatus(!status);
+//   };
 
 //   const handleLayout = e => {
 //     const { height, width } = e.nativeEvent.layout;
@@ -192,9 +192,9 @@ const LiveNess = ({navigation}) => {
                 onEvent={(data) => {
                     console.log('===sendEvent===', data.nativeEvent?.data);
                 }}
-                requestid={''}
-                appId={''}
-                baseUrl={''}
+                requestid={'2e53a8ab-ff62-4e7e-95ef-2c6714cc783e'}
+                appId={'com.nganluong.uat'}
+                baseUrl={'https://ekyc-sandbox.eidas.vn/face-matching'}
                 privateKey={privateKey}
                 publicKey={publicKey}
                 debugging={false}

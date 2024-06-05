@@ -61,6 +61,7 @@ android {
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
   }
 
   buildTypes {
@@ -87,7 +88,7 @@ repositories {
   mavenCentral()
   google()
   gradlePluginPortal()
-  maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+//  maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
   maven { url 'https://www.jitpack.io'}
   maven {
     setUrl("$rootDir/repository")
