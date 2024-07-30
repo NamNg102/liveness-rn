@@ -76,7 +76,7 @@ export default function App() {
             }}
             debugging={false}
             minFaceSize={0.4}
-            isThreeDimension={false}
+            isThreeDimension={true}
           />
         </View>
       )}
